@@ -31,7 +31,7 @@ pipeline {
         stage('build and archive executable') {
             steps {
                 sh label: 'show version', script: 'go version'
-                sh label: 'build server', script: "go build -o ../bin/${params.server_app}"
+                sh label: 'build server', script: "go build -o bin/${params.server_app}"
                 archiveArtifacts artifacts: 'bin/*', fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
             }
         }
