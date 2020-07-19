@@ -12,8 +12,8 @@ func main() {
 
 	docker := g.Group("/docker")
 	{
-		docker.GET("/", ctrl.GetDockerInstances)
-		docker.GET("/stats", ctrl.GetDockerStatus)
+		//docker.GET("/", ctrl.GetDockerInstances)
+		docker.GET("/", ctrl.GetDockerStatus)
 	}
 
 	memory := g.Group("/memory")
