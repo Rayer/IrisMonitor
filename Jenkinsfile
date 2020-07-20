@@ -47,4 +47,16 @@ pipeline {
             }
         }
     }
+
+   post {
+        aborted {
+            slackSend message: "Project ${Project_Name} aborted."
+        }
+        success {
+            slackSend message: "Project ${Project_Name} is built successfully."
+        }
+        failure {
+            slackSend message: "Project ${Project_Name} is failed to be built."
+        }
+    }
 }
