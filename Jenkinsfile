@@ -41,9 +41,9 @@ pipeline {
 
         stage('Push executable to servers') {
             steps {
-                sh label: 'Installing on node.rayer.idv.tw', script: "ssh jenkins@${Iris} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && ~/${params.server_app}'"
-                sh label: 'Installing on node1.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR1} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && ~/${params.server_app}'"
-                sh label: 'Installing on node2.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR2} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && ~/${params.server_app}'"
+                sh label: 'Installing on node.rayer.idv.tw', script: "ssh jenkins@${Iris} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && nohup ~/${params.server_app}&'"
+                sh label: 'Installing on node1.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR1} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && nohup ~/${params.server_app}&'"
+                sh label: 'Installing on node2.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR2} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && nohup ~/${params.server_app}&'"
             }
         }
     }
