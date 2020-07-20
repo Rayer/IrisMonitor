@@ -1,4 +1,7 @@
 Project_Name = 'Iris-Monitor'
+Iris = 'node.rayer.idv.tw'
+Iris_OCR1 = 'node1.rayer.idv.tw'
+Iris_OCR2 = 'node2.rayer.idv.tw'
 pipeline {
     agent any
     parameters {
@@ -38,9 +41,9 @@ pipeline {
 
         stage('Push executable to servers') {
             steps {
-                sh label: 'Installing on node.rayer.idv.tw', script: ''
-                sh label: 'Installing on node1.rayer.idv.tw', script: ''
-                sh label: 'Installing on node2.rayer.idv.tw', script: ''
+                sh label: 'Installing on node.rayer.idv.tw', script: "ssh jenkins@${Iris} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && ~/${params.server_app}'"
+                sh label: 'Installing on node1.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR1} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && ~/${params.server_app}'"
+                sh label: 'Installing on node2.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR2} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && ~/${params.server_app}'"
             }
         }
     }
