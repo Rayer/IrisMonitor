@@ -41,9 +41,14 @@ pipeline {
 
         stage('Push executable to servers') {
             steps {
-                sh label: 'Installing on node.rayer.idv.tw', script: "ssh jenkins@${Iris} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && nohup ~/${params.server_app}&'"
-                sh label: 'Installing on node1.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR1} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && nohup ~/${params.server_app}&'"
-                sh label: 'Installing on node2.rayer.idv.tw', script: "ssh jenkins@${Iris_OCR2} 'pkill ${params.server_app} && scp bin/${params.server_app} ~/ && nohup ~/${params.server_app}&'"
+                sh label: 'Installing on node.rayer.idv.tw', script: "scp bin/${params.server_app} jenkins${Iris}:~/ && ssh jenkins@${Iris} -C 'pkill ${params.server_app} && nohup ~/${params.server_app}&'"
+                sh label: 'Installing on node1.rayer.idv.tw', script: "scp bin/${params.server_app} jenkins${Iris_OCR1}:~/ && ssh jenkins@${Iris_OCR1} -C 'pkill ${params.server_app} && nohup ~/${params.server_app}&'"
+                sh label: 'Installing on node2.rayer.idv.tw', script: "scp bin/${params.server_app} jenkins${Iris_OCR2}:~/ && ssh jenkins@${Iris_OCR2} -C 'pkill ${params.server_app} && nohup ~/${params.server_app}&'"
+            }
+        }
+        stage('Check monitors up') {
+            steps {
+
             }
         }
     }
