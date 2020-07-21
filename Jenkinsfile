@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sh label: "Stopping monitor on ${Iris}", script: "ssh jenkins@${Iris} -C pkill ${params.server_app} -f || true"
                 sh label: "SCP to ${Iris}", script: "scp bin/${params.server_app} jenkins@${Iris}:~/"
-                sh label: "Starting monitor on ${Iris}", script: "ssh jenkins@${Iris} -f sh -c \'nohup ./${params.server_app} >> /tmp/monitor.log\'"
+                sh label: "Starting monitor on ${Iris}", script: "ssh jenkins@${Iris} -f sh -c \\'nohup ./${params.server_app} &\\'"
                 sh label: "Stopping monitor on ${Iris_OCR1}", script: "ssh jenkins@${Iris_OCR1} -C pkill ${params.server_app} -f || true"
                 sh label: "SCP to ${Iris_OCR1}", script: "scp bin/${params.server_app} jenkins@${Iris_OCR1}:~/"
                 sh label: "Starting monitor on ${Iris_OCR1}", script: "ssh jenkins@${Iris_OCR1} -f sh -c \'nohup ./${params.server_app} >> /tmp/monitor.log\'"
