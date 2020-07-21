@@ -41,15 +41,15 @@ pipeline {
 
         stage('Push executable to servers') {
             steps {
-                sh label: 'Stopping monitor on ${Iris}', script: "ssh jenkins@${Iris} -C pkill ${params.server_app} -f || true"
-                sh label: 'SCP to ${Iris}', script: "scp bin/${params.server_app} jenkins@${Iris}:~/"
-                sh label: 'Starting monitor on ${Iris}', script: "ssh jenkins@${Iris} -C \"sh -c 'nohup ./${params.server_app} &'\""
-                sh label: 'Stopping monitor on ${Iris_OCR1}', script: "ssh jenkins@${Iris_OCR1} -C pkill ${params.server_app} -f || true"
-                sh label: 'SCP to ${Iris_OCR1}', script: "scp bin/${params.server_app} jenkins@${Iris_OCR1}:~/"
-                sh label: 'Starting monitor on ${Iris_OCR1}', script: "ssh jenkins@${Iris_OCR1} -C \"sh -c 'nohup ./${params.server_app} &'\""
-                sh label: 'Stopping monitor on ${Iris_OCR2}', script: "ssh jenkins@${Iris_OCR2} -C pkill ${params.server_app} -f || true"
-                sh label: 'SCP to ${Iris_OCR2}', script: "scp bin/${params.server_app} jenkins@${Iris_OCR2}:~/"
-                sh label: 'Starting monitor on ${Iris_OCR2}', script: "ssh jenkins@${Iris_OCR2} -C \"sh -c 'nohup ./${params.server_app} &'\""
+                sh label: "Stopping monitor on ${Iris}", script: "ssh jenkins@${Iris} -C pkill ${params.server_app} -f || true"
+                sh label: "SCP to ${Iris}", script: "scp bin/${params.server_app} jenkins@${Iris}:~/"
+                sh label: "Starting monitor on ${Iris}", script: "ssh jenkins@${Iris} sh -c 'nohup ./${params.server_app} &'"
+                sh label: "Stopping monitor on ${Iris_OCR1}", script: "ssh jenkins@${Iris_OCR1} -C pkill ${params.server_app} -f || true"
+                sh label: "SCP to ${Iris_OCR1}", script: "scp bin/${params.server_app} jenkins@${Iris_OCR1}:~/"
+                sh label: "Starting monitor on ${Iris_OCR1}", script: "ssh jenkins@${Iris_OCR1} sh -c 'nohup ./${params.server_app} &'"
+                sh label: "Stopping monitor on ${Iris_OCR2}", script: "ssh jenkins@${Iris_OCR2} -C pkill ${params.server_app} -f || true"
+                sh label: "SCP to ${Iris_OCR2}", script: "scp bin/${params.server_app} jenkins@${Iris_OCR2}:~/"
+                sh label: "Starting monitor on ${Iris_OCR2}", script: "ssh jenkins@${Iris_OCR2} sh -c 'nohup ./${params.server_app} &'"
             }
         }
     }
